@@ -1,0 +1,229 @@
+1. Write a JS program to create object of person with fields as follows:-
+fname - string
+lname - string
+age - int
+skills - array
+address - object
+	city - string
+	pincode - int
+dateOfBirth - Date
+married - Boolean
+profession - string
+
+Create minimum 2 objects and display the object's detail uisng global print method.
+
+CODE
+
+var amitabh = new Object();
+amitabh.fname = "Abhishek";
+amitabh.lname = "Bachchan";
+amitabh.age = 60;
+amitabh.skills = "acting";
+amitabh.address = {
+    city: "mumbai",
+    pincode: "226016"
+};
+amitabh.dateofBirth = new Date("05/04/1963").toDateString();
+amitabh.married = "true";
+amitabh.profession = "actor";
+amitabh.print = function()
+{
+    console.log(
+        this.fname,this.lname, this.age, this.skills,this.address.city,this.address.pincode,this.dateofBirth,this.married,this.married);
+}
+
+var abhishek = Object.create(amitabh);
+abhishek.fname ="Abhishek";
+abhishek.age = 35;
+abhishek.dateofBirth = new Date('05/04/1985').toDateString();
+amitabh.print();
+abhishek.print();
+
+
+ 
+
+
+2. Modify the above program to create 2 objects, amitabh and abhishek, here abhishek has some common properties from amitabh, try to use it such common properties from amitabh instead of creating it in abhishek.
+
+code
+
+var amitabh = new Object();
+amitabh.fname = "Abhishek";
+amitabh.lname = "Bachchan";
+amitabh.age = 60;
+amitabh.skills = "acting";
+amitabh.address = {
+    city: "mumbai",
+    pincode: "226016"
+};
+amitabh.dateofBirth = new Date("05/04/1963").toDateString();
+amitabh.married = "true";
+amitabh.profession = "actor";
+amitabh.print = function()
+{
+    console.log(
+        this.fname,this.lname, this.age, this.skills,this.address.city,this.address.pincode,this.dateofBirth,this.married,this.married);
+}
+
+var abhishek = Object.create(amitabh);
+abhishek.fname ="Abhishek";
+abhishek.age = 35;
+abhishek.dateofBirth = new Date('05/04/1985').toDateString();
+amitabh.print();
+abhishek.print();
+
+
+ 
+
+3. Modify the above code to create third object as "Aaradhya", this object shares the common properties from amitabh as well as abhishek accordingly demostrate on your own.
+
+
+CODE
+
+var amitabh = new Object();
+amitabh.fname = "Abhishek";
+amitabh.lname = "Bachchan";
+amitabh.age = 60;
+amitabh.skills = "acting";
+amitabh.address = {
+    city: "mumbai",
+    pincode: "226016"
+};
+amitabh.dateofBirth = new Date("05/04/1963").toDateString();
+amitabh.married = "true";
+amitabh.profession = "actor";
+amitabh.print = function()
+{
+    console.log(
+        this.fname,this.lname, this.age, this.skills,this.address.city,this.address.pincode,this.dateofBirth,this.married,this.married);
+}
+
+var abhishek = Object.create(amitabh);
+abhishek.fname ="Abhishek";
+abhishek.age = 35;
+abhishek.dateofBirth = new Date('05/04/1985').toDateString();
+amitabh.print();
+abhishek.print();
+
+var aaradhya = Object.create(abhishek);
+abhishek.fname ="Abhishek";
+abhishek.age = 5;
+abhishek.dateofBirth = new Date('05/04/2015').toDateString();
+aaradhya.skills = "play";
+aaradhya.married = "false";
+aaradhya.profession = "study";
+amitabh.print();
+abhishek.print();
+aaradhya.print();
+
+
+ 
+
+4. Create a JS program to implement below:-
+
+	   BankAccount
+		|(accountNumber)
+		|(accountHolderName)
+		|(accountBalance)
+	-------------------------
+	|			|
+	Savings			Current
+	    (isSalary)		     (odLimit)
+
+
+Now, 
+create 1 object of savings with accountNumber, accountHolderName, accountBalance and isSalary.
+create 1 object of currrent with accountNumber, accountHolderName, accountBalance and odLimit.
+
+use savings account object to call a function withdraw(amount), that will subtract the amount from the accountBalance, Note that accountBalance should not go below 0.
+
+use current account object to calla function withdraw(amount), that will subtract the amount from the accountBalance, Note that accountBalance should not go below negative of odLimit.
+
+Now, call getCurrentBalance() from both the object, that will return the accountBalance of the object used to call this method.
+
+
+
+cODE
+
+
+
+class BankAccount
+{
+constructor(accountNumber, accountHoldername, accountBalance)
+{
+this.accountNumber = accountNumber;
+this.accountHoldername = accountHoldername;
+this.accountBalance = accountBalance;
+}
+deposit(amount)
+{
+    this.accountBalance += amount;
+}
+getCurrentBalance()
+{
+    if(this == savings)
+console.log("savings accountbalance "+this.accountBalance);
+else
+console.log("current accountbalance "+this.accountBalance);
+}
+}
+class Savings extends BankAccount
+{
+    constructor(accountNumber, accountHoldername, accountBalance, isSalary)
+    {
+            super(accountNumber, accountHoldername, accountBalance);
+                this.isSalary = isSalary;
+    }
+    withdraw(amount_to_wthdraw)
+    {
+        this.amount_to_wthdraw = amount_to_wthdraw;
+        this.remainaccountBalance = Number(this.accountBalance) - Number(this.amount_to_wthdraw);
+        if(this.remainaccountBalance > 0)
+        {
+            this.accountBalance = this.accountBalance - this.amount_to_wthdraw;
+            console.log("You successfully withdraw your Amount");
+        }
+            else
+        console.log("Insufficient Balance");
+    }
+}
+class Current extends BankAccount
+{
+    
+    constructor(accountNumber, accountHoldername, accountBalance, odLimit)
+    {
+            super(accountNumber, accountHoldername, accountBalance);
+                this.odLimit = odLimit;
+    }
+    withdraw(amount_to_wthdraw)
+    {
+        this.amount_to_wthdraw = amount_to_wthdraw;
+        this.remainaccountBalance = Number(this.accountBalance) - Number(this.amount_to_wthdraw);
+        if(this.remainaccountBalance < 0)
+        {
+            if((this.odLimit)+(this.accountBalance)>(this.amount_to_wthdraw))
+            {
+                var amountInOverDraft = (this.odLimit)+(this.accountBalance)-(this.amount_to_wthdraw);
+                console.log("after amount withdraw remaining balance  "+ amountInOverDraft);
+            }
+            else
+            {
+                console.log("can't withdraw");
+            }
+        }
+        else
+        console.log("amount withdraw successfully from current account");
+}
+}
+var savings = new Savings("1234567","Aakash",500000,true);
+var current = new Current("1234567","Aakash",1000000,1000000);
+
+
+savings.deposit(200);
+savings.withdraw(200);
+current.deposit(200);
+current.withdraw(200);
+savings.getCurrentBalance();
+current.getCurrentBalance();
+
+
