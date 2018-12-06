@@ -1,0 +1,194 @@
+1. List all the DOM objects names below.
+
+5 DOM OBJECTS ARE
+
+1. Document
+2. Element
+3. Attribute
+4. Event
+5. Style
+
+2. List all the BOM objects names below.
+
+5 BOM OBJECTS ARE
+
+1. Navigator
+2. Window
+3. Screen
+4. History
+5. Location
+
+
+3.1. Find out most commonly used functions(minimum 4) of "document" object and write their purpose with a code snippet which proves the purpose.
+
+Functions of document objects are
+
+1. document.getElementById(id)---The getElementById() method returns the element that has the ID attribute with the specified value.
+This method is one of the most common methods in the HTML DOM, and is used almost every time you want to manipulate, or get info from, an element on your document.
+Returns null if no elements with the specified ID exists.
+
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+
+2. document.getElementsByTagName(name)----The getElementsByTagName() method returns a collection of all elements in the document with the specified tag name, as a NodeList object.
+The NodeList object represents a collection of nodes. The nodes can be accessed by index numbers. The index starts at 0.
+Tip: The parametervalue "*" returns all elements in the document.
+
+<script>
+function myFunction() {
+    var x = document.getElementsByTagName("LI");
+    document.getElementById("demo").innerHTML = x[1].innerHTML;
+}
+</script>
+
+3. document.getElementsByClassName(name)----The getElementsByClassName() method returns a collection of all elements in the document with the specified class name, as a NodeList object.
+The NodeList object represents a collection of nodes. The nodes can be accessed by index numbers. The index starts at 0.
+Tip: You can use the length property of the NodeList object to determine the number of elements with a specified class name, then you can loop through all elements and extract the info you want.
+
+<script>
+function myFunction() {
+    var x = document.getElementsByClassName("example");
+    x[0].innerHTML = "Hello World!";
+}
+</script>
+
+
+4. element.setAttribute(attribute, value)----The setAttribute() method adds the specified attribute to an element, and gives it the specified value.
+If the specified attribute already exists, only the value is set/changed.
+Note: Although it is possible to add the style attribute with a value to an element with this method, it is recommended that you use properties of the Style object instead for inline styling, because this will not overwrite other CSS properties that may be specified in the style attribute:
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+    document.getElementsByTagName("H1")[0].setAttribute("class", "democlass"); 
+}
+</script>
+
+
+3.2. Find out most commonly used functions(minimum 4) of "window" object and write their purpose with a code snippet which proves the purpose.
+
+Window Object Methods
+
+alert();
+code--alert("Hello! I am an alert box!!");
+
+atob();
+code----var str = "Hello World!";
+var enc = window.btoa(str);
+var dec = window.atob(enc);
+var res = "Encoded String: " + enc + "<br>" + "Decoded String: " + dec;
+
+blur();
+code---var myWindow = window.open("", "", "width=200, height=100");   // Opens a new window
+myWindow.document.write("<p>A new window!</p>");      // Some text in the new window
+myWindow.blur();                          // Assures that the new window does NOT get focus
+
+close()
+code----function openWin() {
+    myWindow = window.open("", "myWindow", "width=200, height=100");   // Opens a new window
+}
+
+function closeWin() {
+    myWindow.close();   // Closes the new window
+}
+
+4. Create an HTML page with a button on it, when the button is clicked, it should display an alert box with text "Hello World"
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="myFunction()">Click</button>
+
+<script>
+function myFunction() {
+    alert("Hello World!");
+}
+</script>
+
+</body>
+</html>
+
+5. Create an HTML page with a button on it, when the button is clicked, it should display the text "Hello World" on the page.
+NOTE: The buttton might have gone after text appears.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="myFunction()">Click</button>
+
+<script type="text/javascript">
+function myFunction() {
+    document.write("Hello World!");
+}
+</script>
+
+</body>
+</html>
+
+6. Create an HTML page with a button on it, when the button is clicked, it should display the text "Hello World" on the page, just below the button.
+NOTE: This time the button should not go off, it is still visible and present on the page.
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<p id="demo"></p>
+
+<button onclick="myFunction()">Click</button>
+<script type="text/javascript">
+function myFunction() {
+   document.getElementById("demo").innerHTML="hello world"
+}
+</script>
+
+</body>
+</html>
+
+7. Create an HTML Page with a textbox and a button, write anything in the text box and click on the button, Onclick of the button it should display the text on the alert box that was entered in the textbox.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+
+Text me:<input type="text" id="hi">
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+var x=document.getElementById("hi").value;
+ alert(x);
+}
+</script>
+
+</body>
+</html>
+
+
+8. Create an HTML Page with a textbox and a button, write anything in the text box and click on the button, Onclick of the button it should display the text just below the textbox on the webpage that was entered in the textbox.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+
+Text me:<input type="text" id="hi">
+<p id="demo"></p>
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+var x=document.getElementById("hi").value;
+   document.getElementById("demo").innerHTML=x;
+}
+</script>
+
+</body>
+</html>
