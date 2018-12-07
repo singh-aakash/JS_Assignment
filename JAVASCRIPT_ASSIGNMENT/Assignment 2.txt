@@ -1,0 +1,37 @@
+
+Write a script which uses a prompt box to get an input. Validate that the input is an Integer between 1 and 30, and then print to the page asterisks (*) to represent the number. Your script must run until you have collected 3 valid inputs as well as generate 3 outputs (one output on one line).
+Example:
+Input: 4
+Input: 6
+Input: 12
+****
+******
+************
+
+CODE 
+
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+var x = prompt("num1");
+var y = prompt("num2");
+var z = prompt("num3");
+for(i = 1;i <= x;i++)
+{
+    document.write("*");
+}
+document.write("<br>");
+for(j = 1;j <= y;j++)
+{
+    document.write("*");
+}
+document.write("<br>");
+for(k = 1;k <= z;k++)
+{
+    document.write("*");
+}
+document.write("<br>");
+    </script>
+</body>
+</html>

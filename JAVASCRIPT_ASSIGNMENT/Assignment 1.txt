@@ -1,0 +1,27 @@
+Create a simple page that lets users type in some temperature value in the Fahrenheit scale and when the user clicks a “Show results” button, to show the temperature in Celsius scale. For example, if the user types in 32, your results should show “0 degree Celsius.”
+Functionality
+At the least, your program should allow for the following
+User Input: One text field where the user will type in the temperature in Fahrenheit
+Input Validation: When the “Show results” button is clicked, your program should check to see if the user has left the text field empty and also if what the user typed is a number and not anything else.
+If there are problems (as in II. above) then your program should show appropriate error messages
+Display results: If there are no errors and user input is valid, then your program should show the results to the user.
+
+CODE
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    Temperature in F =<input id="num1" type="number" name="Enter the Temperature" 
+    required pattern="[0-9]{3}" placeholder="please enter the temperature" value="" required>
+<button onclick="myFunction()">Click</button>
+<p id="demo"></p>
+<script type="text/javascript">
+function myFunction() {
+    var x = document.getElementById("num1").value, cel = 0;
+    cel = (x - 32) * 5/9;
+    document.getElementById("demo").innerHTML = cel + " degree celcius";
+}
+</script>
+</body>
+</html>

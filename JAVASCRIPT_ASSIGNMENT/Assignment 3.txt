@@ -1,0 +1,39 @@
+
+Create an HTML page that will Prompt the user: 
+It should take input for the number of rows and the number of columns
+Then it should create a table (HTML table) with the given number of row and columns
+Each cell of the table should contain the cell id (row#, col#)
+
+CODE
+
+
+<!DOCTYPE html>
+<html>
+        <head>
+    <style type="text/css">
+body
+{ margin: 30px;
+   }   </style>
+   </head>
+   <body>
+       <table id="m1" border="2"></table>
+       <form >
+           <input type="button" onclick="create()" value="create table">
+       </form>
+<script>
+   function create(){
+var rows = window.prompt("enter no. of rows", 2);
+var columns = window.prompt("enter number of columns", 2);
+for(var i=0;i<parseInt(rows,10);i++)
+{
+    var r = document.getElementById('m1').insertRow(i);
+    for(var j=0;j<parseInt(columns,10);j++)
+{
+    var x = r.insertCell(j);
+    x.innerHTML = "Row-" +i+ "Column - "+j; 
+}
+}
+}
+    </script>
+</body>
+</html>

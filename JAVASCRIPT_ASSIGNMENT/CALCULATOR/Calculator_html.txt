@@ -1,0 +1,51 @@
+Assignment 4:
+In this assignment, we will write a JavaScript web application called MyCalculator. All 3 files (the .js, .html and .css files should be in the MyCalculator folder and should be called MyCalculator.XXX).
+The program should do the following:
+-There should be one resultBox in the .html page and one runCalculator button. This should be clicked to run the program.
+-Present a menu of 7 choices to the user, using a prompt:
+            1. Add
+            2. Subtract
+            3. Multiply
+            4. Divide
+            5. Exponent
+            6. Mean
+            7. Quit
+- If the user selects anything other than 1-7, the program should print an error message and ask the user to select again. Use a for loop to check this.
+-If the user selects 1, the program should ask the user to enter the first number and then the second, and then print out the result in the resultBox. Then it should display the prompt menu again.
+-Similar behavior for choices 2,3 and 4: for subtract, subtract the second number from the first, for divide, divide the first number by the second.
+-We should do isNAN checks for all numbers. Use a for loop to check that each input is a number.
+-For choice 5, the program should ask for the base, and then the exponent, and then print out the answer, using the Math.pow() method or equivalent.
+-For choice 6, the program should prompt the user to input a series of numbers. The series ends, when the user enters a “***”. At this point, our program should print out the mean value, and then show the main menu prompt again.
+
+
+
+<html>
+    <head>
+        <title>
+            Calculator
+        </title>
+        <style>
+        .sec
+        {
+            position: absolute;
+            border-radius: 20px;
+            left: 500px;
+            font-size: 80px;
+            top: 300px;
+        }
+        .sec1
+        {
+            position: absolute;
+            border-radius: 3px;
+            left: 500px;
+            font-size: 30px;
+            top: 200px;
+        }
+        </style>
+    </head>
+    <body>
+    <script src="mycalculator.js"></script>
+    <input class="sec1" type="text" id="op" value="">
+    <input class="sec" type="button" onclick="fun()" value="Calculator">
+    </body>
+</html>

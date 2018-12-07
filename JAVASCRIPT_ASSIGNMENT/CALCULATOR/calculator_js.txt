@@ -1,0 +1,56 @@
+function fun()
+{
+    var x = prompt("enter the number for what type of calculation You want \n 1. Add \n 2. Subtract \n 3. Multiply \n 4. Divide \n 5. Exponent \n 6. Mean \n 07. Quit");
+    switch (x) {
+        case '1':
+        var y = prompt("enter the first number");
+        var z = prompt("enter the second number");
+        var w = Number(y) + Number(z);
+        document.getElementById("op").value = w;
+        break;
+
+        case '2':
+        var y = prompt("enter the first number");
+        var z = prompt("enter the second number");
+        var w = Number(y) - Number(z);
+        document.getElementById("op").value = w;
+        break;
+
+        case '3':
+        var y = prompt("enter the first number");
+        var z = prompt("enter the second number");
+        var w = Number(y) * Number(z);
+        document.getElementById("op").value = w;
+        break;
+
+        case '4':
+        var y = prompt("enter the first number");
+        var z = prompt("enter the second number");
+        var w = Number(y) / Number(z);
+        document.getElementById("op").value = w;
+        break;
+
+        case '5':
+        var y = prompt("enter the base number");
+        var z = prompt("enter the exponent number");
+        var w = Math.pow(Number(y),Number(z));
+        document.getElementById("op").value = w;
+        break;
+
+        case '6':
+        var sum = 0, i = 0, y=0;
+        while((y = prompt("enter the numbers"))!= "=" && isNaN(y)!=true)
+        {
+            sum = Number(sum) + Number(y);
+            ++i;
+        }
+        document.getElementById("op").value = Number(sum)/Number(i);
+        break;
+
+        case '7':
+        break;
+        default:
+
+        window.alert("valid input");
+    }
+}
