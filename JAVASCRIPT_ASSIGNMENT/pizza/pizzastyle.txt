@@ -1,0 +1,52 @@
+.name{
+    margin: 4px;
+    padding: 4px;
+}
+
+.email{
+    margin: 4px;
+    padding: 4px;
+}
+
+.Toppings{
+    margin: 4px;
+    padding: 4px;
+}
+input{
+    padding: 4px;
+    margin-right: 4px;
+    
+}
+b{
+    padding: 4px;
+    margin: 4px;
+}
+textarea{
+    width: 200px;
+    height: 70px;
+}
+
+.Address{
+
+    padding: 4px;
+    margin: 4px;
+}
+.ActionButtons{
+    
+    padding: 4px;
+    margin: 4px;
+}
+
+
+  table, td {
+    border: 1px solid rgb(14, 13, 13);
+        border-collapse: collapse;
+
+}
+
+  th, td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  tr:nth-child(even) {background-color:brown;}
