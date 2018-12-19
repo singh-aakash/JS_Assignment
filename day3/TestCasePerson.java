@@ -11,13 +11,13 @@ public class TestCasePerson {
 	
 	@Test
 	public void testShow1() {
-		person1.toString();
-		//assertEquals("Name: Ram, Date Of Birth: 5/6/1980", person1.toString());
+		
+		assertEquals("Name: Ram, Days: 14 months: 6 years: 38", person1.toString());
 	}
 	@Test
 	public void testShow2() {
-		person2.toString();
-		//assertEquals("Name: Shyam, Date Of Birth: 2/3/1987", person2.toString());
+		
+		assertEquals("Name: Shyam, Days: 17 months: 9 years: 31", person2.toString());
 	}
 	
 	@Test

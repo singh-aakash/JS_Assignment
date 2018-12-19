@@ -38,18 +38,14 @@ class Person
 		//Older one of the invoking and given person object is identified and its details are 
 		//displayed in the following format:
 		//.... is older than .... by ... years, ... months and ... days.
-		Object old;
-		Object young;
-		if(this.dateOfBirth.isBefore(person2.dateOfBirth))
-		{
-			old = this.dateOfBirth;
-			young = this.dateOfBirth;
-		}
+		LocalDate old = LocalDate.of(this.day, this.month, this.year);
+		LocalDate young = LocalDate.of(person2.day, person2.month, person2.year);
+		Period diffenceOfYears;
+		diffenceOfYears
+		if(old.equals(young))
+			return "Both are of same age";
 		else
-		{
-			young = this.dateOfBirth;
-			old = this.dateOfBirth;
-		}
+			
 		
 		return name;
 	}
