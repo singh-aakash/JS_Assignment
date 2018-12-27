@@ -7,6 +7,8 @@ import com.moneymoney.account.SavingsAccount;
 import com.moneymoney.account.dao.SavingsAccountDAO;
 import com.moneymoney.account.dao.SavingsAccountDAOImpl;
 import com.moneymoney.account.factory.AccountFactory;
+import com.moneymoney.account.util.DBUtil;
+import com.moneymoney.exception.AccountNotFoundException;
 import com.moneymoney.exception.InsufficientFundsException;
 import com.moneymoney.exception.InvalidInputException;
 
@@ -59,8 +61,17 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	@Override
 	public void fundTransfer(SavingsAccount sender, SavingsAccount receiver, double amount)
 			throws ClassNotFoundException, SQLException {
-		withdraw(sender, amount);
-		deposit(receiver, amount);
+		try {
+			withdraw(sender, amount);
+			deposit(receiver, amount);
+			DBUtil.commit();
+		} catch (InvalidInputException | InsufficientFundsException e) {
+			e.printStackTrace();
+			DBUtil.rollback();
+		} catch(Exception e) {
+			e.printStackTrace();
+			DBUtil.rollback();
+		}
 	}
 
 	@Override
@@ -70,15 +81,15 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 	}
 
 	@Override
-	public SavingsAccount getAccountById(int accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public SavingsAccount getAccountById(int accountNumber) throws ClassNotFoundException, SQLException, AccountNotFoundException {
+		return savingsAccountDAO.getAccountById(accountNumber);
 	}
 
 	@Override
-	public SavingsAccount deleteAccount(int accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public SavingsAccount deleteAccount(int accountNumber) throws ClassNotFoundException, SQLException{
+		System.out.println("insiode");
+		return savingsAccountDAO.deleteAccount(accountNumber);
+		
 	}
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.moneymoney.account.SavingsAccount;
 import com.moneymoney.account.util.DBUtil;
+import com.moneymoney.exception.AccountNotFoundException;
 
 public class SavingsAccountDAOImpl implements SavingsAccountDAO {
 
@@ -24,7 +25,7 @@ public class SavingsAccountDAOImpl implements SavingsAccountDAO {
 		preparedStatement.setString(6, "SA");
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
-		DBUtil.closeConnection();
+		DBUtil.commit();
 		return account;
 	}
 
@@ -42,7 +43,7 @@ public class SavingsAccountDAOImpl implements SavingsAccountDAO {
 					salary);
 			savingsAccounts.add(savingsAccount);
 		}
-		DBUtil.closeConnection();
+		DBUtil.commit();
 		return savingsAccounts;
 	}
 	@Override
@@ -55,20 +56,40 @@ public class SavingsAccountDAOImpl implements SavingsAccountDAO {
 		preparedStatement.setInt(2, accountNumber);
 		preparedStatement.executeUpdate();
 	}
+	
+	@Override
+	public SavingsAccount getAccountById(int accountNumber) throws ClassNotFoundException, SQLException, AccountNotFoundException {
+		Connection connection = DBUtil.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement
+				("SELECT * FROM account where account_id=?");
+		preparedStatement.setInt(1, accountNumber);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		SavingsAccount savingsAccount = null;
+		if(resultSet.next()) {
+			String accountHolderName = resultSet.getString("account_hn");
+			double accountBalance = resultSet.getDouble(3);
+			boolean salary = resultSet.getBoolean("salary");
+			savingsAccount = new SavingsAccount(accountNumber, accountHolderName, accountBalance,
+					salary);
+			return savingsAccount;
+		}
+		throw new AccountNotFoundException("Account with account number "+accountNumber+" does not exist.");
+	}
+	
 	public SavingsAccount updateAccount(SavingsAccount account) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public SavingsAccount getAccountById(int accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
-	public SavingsAccount deleteAccount(int accountNumber) {
-		// TODO Auto-generated method stub
+	public SavingsAccount deleteAccount(int accountNumber) throws SQLException, ClassNotFoundException {
+		Connection connection = DBUtil.getConnection();
+		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM account WHERE account_id = ?");
+		preparedStatement.setInt(1, accountNumber);
+		int rowsAffected = preparedStatement.executeUpdate();
+	
 		return null;
 	}
 

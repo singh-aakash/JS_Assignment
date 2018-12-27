@@ -7,10 +7,12 @@ import java.util.Scanner;
 import com.moneymoney.account.SavingsAccount;
 import com.moneymoney.account.service.SavingsAccountService;
 import com.moneymoney.account.service.SavingsAccountServiceImpl;
+import com.moneymoney.account.util.DBUtil;
+import com.moneymoney.exception.AccountNotFoundException;
 
 public class AccountCUI {
 	private static Scanner scanner = new Scanner(System.in);
-	private static SavingsAccountService savingsAccountService;
+	private static SavingsAccountService savingsAccountService=new SavingsAccountServiceImpl();
 	public static void start() {
 		
 		do {
@@ -41,6 +43,9 @@ public class AccountCUI {
 		case 1:
 			acceptInput("SA");
 			break;
+		case 3:
+			deleteAccount();
+			break;
 		case 9:
 			showAllAccounts();
 			break;
@@ -50,7 +55,16 @@ public class AccountCUI {
 		case 6:
 			deposit();
 			break;
+		case 7:
+			fundTransfer();
+			break;
+
 		case 11:
+			try {
+				DBUtil.closeConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			System.exit(0);
 			break;
 		default:
@@ -60,13 +74,99 @@ public class AccountCUI {
 		
 	}
 
-	private static void deposit() {
-		// TODO Auto-generated method stub
+	private static void deleteAccount() {
+		System.out.println("Enter account number to delete");
+		int deleteaccountNumber = scanner.nextInt();
+		//SavingsAccount savingsAccount = null;
+		try {
+		//	SavingsAccount savingsAccount = savingsAccountService.getAccountById(deleteaccountNumber);
+			savingsAccountService.deleteAccount(deleteaccountNumber);
+			DBUtil.commit();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 		
 	}
 
+	private static void fundTransfer() {
+		System.out.println("Enter Account Sender's Number: ");
+		int senderAccountNumber = scanner.nextInt();
+		System.out.println("Enter Account Receiver's Number: ");
+		int receiverAccountNumber = scanner.nextInt();
+		System.out.println("Enter Amount: ");
+		double amount = scanner.nextDouble();
+		try {
+			SavingsAccount senderSavingsAccount = savingsAccountService.getAccountById(senderAccountNumber);
+			SavingsAccount receiverSavingsAccount = savingsAccountService.getAccountById(receiverAccountNumber);
+			savingsAccountService.fundTransfer(senderSavingsAccount, receiverSavingsAccount, amount);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void deposit() {
+		System.out.println("Enter Account Number: ");
+		int accountNumber = scanner.nextInt();
+		System.out.println("Enter Amount: ");
+		double amount = scanner.nextDouble();
+		SavingsAccount savingsAccount = null;
+		try {
+			savingsAccount = savingsAccountService.getAccountById(accountNumber);
+			savingsAccountService.deposit(savingsAccount, amount);
+			DBUtil.commit();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
 	private static void withdraw() {
-		//TODO 
+		System.out.println("Enter Account Number: ");
+		int accountNumber = scanner.nextInt();
+		System.out.println("Enter Amount: ");
+		double amount = scanner.nextDouble();
+		SavingsAccount savingsAccount = null;
+		try {
+			savingsAccount = savingsAccountService.getAccountById(accountNumber);
+			savingsAccountService.withdraw(savingsAccount, amount);
+			DBUtil.commit();
+		} catch (ClassNotFoundException | SQLException | AccountNotFoundException e) {
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} catch (Exception e) {
+			try {
+				DBUtil.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	private static void sortMenu(String sortWay) {
@@ -114,7 +214,6 @@ public class AccountCUI {
 	}
 
 	private static void createSavingsAccount(String accountHolderName, double accountBalance, boolean salary) {
-		savingsAccountService = new SavingsAccountServiceImpl();
 		try {
 			savingsAccountService.createNewAccount(accountHolderName, accountBalance, salary);
 		} catch (ClassNotFoundException e) {

@@ -13,6 +13,7 @@ public class DBUtil {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection
 				("jdbc:mysql://localhost:3306/bankapp_db", "root", "root");
+			connection.setAutoCommit(false);
 		}
 		return connection;
 	}

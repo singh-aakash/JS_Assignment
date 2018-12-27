@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.moneymoney.account.SavingsAccount;
+import com.moneymoney.exception.AccountNotFoundException;
 
 public interface SavingsAccountService {
 
@@ -11,9 +12,9 @@ public interface SavingsAccountService {
 
 	SavingsAccount updateAccount(SavingsAccount account);
 
-	SavingsAccount getAccountById(int accountNumber);
+	SavingsAccount getAccountById(int accountNumber) throws ClassNotFoundException, SQLException, AccountNotFoundException;
 
-	SavingsAccount deleteAccount(int accountNumber);
+	SavingsAccount deleteAccount(int accountNumber) throws ClassNotFoundException, SQLException;
 	
 	List<SavingsAccount> getAllSavingsAccount() throws ClassNotFoundException, SQLException;
 
